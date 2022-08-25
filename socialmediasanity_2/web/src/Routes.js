@@ -9,14 +9,19 @@
 
 import { Router, Route } from '@redwoodjs/router'
 
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Login2Page from './pages/Login2Page/Login2Page'
 
 const Routes = () => {
+
+  // const navigate = useNavigate();
+
   return (
     <Router>
-      <Route path="/" page={HomePage} name="home" />
-      <Route path="/login" page={LoginPage} name="login" />
-      <Route notfound page={NotFoundPage} />
+        <Route path="/login2" page={Login2Page} name="login2" />
+        <Route path="/" page={HomePage} name="home" />
+        <Route path="/login" page={LoginPage} name="login" />
+        <Route notfound page={NotFoundPage} />
     </Router>
   )
 }

@@ -14,6 +14,12 @@ const HomePage = () => {
         My default route is named <code>home</code>, link to me with `
         <Link to={routes.home()}>Home</Link>`
       </p>
+      <p className='p-2'>
+        <Link to={routes.login()}>Login</Link>
+      </p>
+      <p className='p-2'>
+        <Link to={routes.login2()}>Login2</Link>
+      </p>
     </>
   );
 };
