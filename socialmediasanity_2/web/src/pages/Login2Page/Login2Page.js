@@ -16,13 +16,25 @@ const Login2Page = () => {
     let payload = jwt_deocde(userCred);
     console.log(payload);
     setuser(payload);
+
   };
+
+  // let profilImg = user.getImageUrl();
+
   useScript("https://accounts.google.com/gsi/client", () => {
     window.google.accounts.id.initialize({
       client_id: process.env.EMOPIC_APP_GOOGLE_API_TOKEN, // here's your Google ID
       callback: onGoogleSignIn,
       auto_select: false,
     });
+
+    // function onSignIn(user) {
+    //   var profile = user.getBasicProfile();
+    //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //   console.log('Name: ' + profile.getName());
+    //   console.log('Image URL: ' + profile.getImageUrl());
+    //   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    // }
 
     window.google.accounts.id.renderButton(googlebuttonref.current, {
       size: "medium",
@@ -70,9 +82,16 @@ const Login2Page = () => {
           >
           {!user && <div ref={googlebuttonref}></div>}
           {user && (
-            <div>
+            <div className='text-white'>
               <h1>{user.name}</h1>
-              <img src={user.picture} alt="profile" />
+              <img
+                className="round rounded-full h-20 w-20"
+                // src={`${user.picture}`}
+                src="https://images.unsplash.com/photo-1661439387103-382ec41ff1aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
+                // src="https://lh3.googleusercontent.com/a-/AFdZucoK3IL7FgpG8uiGNGzO5kcs_a-demfX2qLSNcSiun4=s96-c"
+                alt="profile"
+                width='80px'
+                />
               <p>{user.email}</p>
 
           <button
