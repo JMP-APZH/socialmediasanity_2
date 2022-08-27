@@ -4,9 +4,9 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'username',
+      name: 'userName',
       title: 'UserName',
-      type: 'string'
+      type: 'string',
     },
     {
       name: 'image',

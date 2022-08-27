@@ -1,25 +1,23 @@
 import { Link, routes } from "@redwoodjs/router";
 import { MetaTags } from "@redwoodjs/web";
 
+import shareVideo from '-!file-loader!web/src/assets/share.mp4'
+import logo from 'web/src/assets/EmoPic.png'
+import { useEffect, useState, useRef } from "react";
+import { useScript } from "../Login2Page/useScript";
+
+import { HiMenu } from 'react-icons/hi';
+
 const HomePage = () => {
+
+
   return (
     <>
-      <MetaTags title="Home" description="Home page" />
 
-      <h1>HomePage</h1>
-      <p>
-        Find me in <code>./web/src/pages/HomePage/HomePage.js</code>
-      </p>
-      <p>
-        My default route is named <code>home</code>, link to me with `
-        <Link to={routes.home()}>Home</Link>`
-      </p>
-      <p className='p-2'>
-        <Link to={routes.login()}>Login</Link>
-      </p>
-      <p className='p-2'>
-        <Link to={routes.login2()}>Login2</Link>
-      </p>
+    <div>
+      Home Page
+    </div>
+
     </>
   );
 };

@@ -8,6 +8,7 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Router, Route } from '@redwoodjs/router'
+import { Navigate, Redirect } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 import Login2Page from './pages/Login2Page/Login2Page'
@@ -18,8 +19,9 @@ const Routes = () => {
 
   return (
     <Router>
-        <Route path="/login2" page={Login2Page} name="login2" />
         <Route path="/" page={HomePage} name="home" />
+        <Route path="/login2" page={Login2Page} name="login2" />
+        <Route path="/redirect" element={ <Navigate to="/" /> } />
         <Route path="/login" page={LoginPage} name="login" />
         <Route notfound page={NotFoundPage} />
     </Router>
