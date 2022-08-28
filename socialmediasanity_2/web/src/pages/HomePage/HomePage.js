@@ -16,6 +16,7 @@ import { userQuery } from "src/utils/data";
 
 import { client } from 'src/client.js';
 import logo from 'web/src/assets/EmoPic.png';
+import Navbar from "src/components/Navbar";
 // import { Route, Router, Routes, Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -41,9 +42,11 @@ const HomePage = () => {
 
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0)
-  }, [])
+  }, []);
 
+  const [searchTerm, setSearchTerm] = useState('');
 
+  // if (!user) return null;
 
   return (
     <>
@@ -99,17 +102,28 @@ const HomePage = () => {
         className="pb-2 flex-1 h-screen overflow-y-scroll"
         ref={scrollRef}
       >
+
+      <Pins
+        user={user && user}
+      />
+
+      <Navbar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          user={userInfo && userInfo}
+      />
+
         {/* <Router> */}
-            {/* <Route
-              path="/user-profile/:userId"
-              page={<UserProfile />}
-              name='userprofileid'
-            />
-            <Route
-              path="/*"
-              element={<Pins user={user && user} />}
-              name='pins'
-            /> */}
+            {/* <Route */}
+              {/* path="/user-profile/:userId" */}
+              {/* page={<UserProfile />} */}
+              {/* name='userprofileid' */}
+            {/* /> */}
+            {/* <Route */}
+              {/* path="/*" */}
+              {/* element={<Pins user={user && user} />} */}
+              {/* name='pins' */}
+            {/* /> */}
         {/* </Router> */}
 
 

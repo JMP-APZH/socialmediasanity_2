@@ -12,10 +12,11 @@ import { Navigate, Redirect } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
 import { UserProfile } from './components'
+import PinDetail from './components/PinDetail'
 import Pins from './container/Pins'
 import Login2Page from './pages/Login2Page/Login2Page'
 
-const Routes = () => {
+const Routes = ({user}) => {
 
   // const navigate = useNavigate();
 
@@ -23,9 +24,11 @@ const Routes = () => {
     <Router>
         <Route path="/" page={HomePage} name="home" />
         <Route path="/login2" page={Login2Page} name="login2" />
-        <Route path="/redirect" element={ <Navigate to="/" /> } />
+        {/* <Route path="/redirect" element={ <Navigate to="/" /> } /> */}
         <Route path="/login" page={LoginPage} name="login" />
         <Route notfound page={NotFoundPage} />
+
+        {/* <Route path='/pin-detail/:pinId' page={<PinDetail user={user} name="pin-detail" />} /> */}
 
         {/* <Route path="/user-profile/:userId" page={<UserProfile />} name='userprofileid' />
         <Route path="/*" element={<Pins user={user && user} />} name='pins' /> */}
