@@ -11,6 +11,8 @@ import { Router, Route } from '@redwoodjs/router'
 import { Navigate, Redirect } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
+import { UserProfile } from './components'
+import Pins from './container/Pins'
 import Login2Page from './pages/Login2Page/Login2Page'
 
 const Routes = () => {
@@ -24,6 +26,10 @@ const Routes = () => {
         <Route path="/redirect" element={ <Navigate to="/" /> } />
         <Route path="/login" page={LoginPage} name="login" />
         <Route notfound page={NotFoundPage} />
+
+        {/* <Route path="/user-profile/:userId" page={<UserProfile />} name='userprofileid' />
+        <Route path="/*" element={<Pins user={user && user} />} name='pins' /> */}
+
     </Router>
   )
 }
