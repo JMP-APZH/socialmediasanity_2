@@ -6,7 +6,7 @@ import { useScript } from "./useScript";
 import jwt_decode from 'jwt-decode';
 import { useEffect, useRef, useState } from "react";
 
-// import { HomePage } from '../HomePage/HomePage';
+// import { HomePage } from 'src\pages\HomePage\HomePage.js';
 
 import { client } from 'src/client.js'
 import { Navigate, Route, useNavigate } from "react-router-dom";
@@ -51,11 +51,11 @@ const Login2Page = () => {
     console.log('the sanity doc inputs are:', doc)
 
     client.createIfNotExists(doc)
-      .then(() => {
+      .then(({ HomePage }) => {
             // {<Link to={routes.home()}/>}
             // <Link to={HomePage}/>
             // <HomePage />
-            <Route path="/" page={HomePage} name="home" />
+            // <Route path="/" page={HomePage} name="home" />
             // {shouldRedirect && <Navigate replace to="/" />}
             // <Navigate to="/" />
             // navigate('/');

@@ -9,7 +9,7 @@ import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 // import { Link, Route, Routes } from 'react-router-dom';
 
-import { Sidebar, UserProfile } from "src/components";
+import { Feed, Sidebar, UserProfile } from "src/components";
 import Pins from "src/container/Pins";
 
 import { userQuery } from "src/utils/data";
@@ -78,7 +78,7 @@ const HomePage = () => {
           to={`user-profile/${user?._id}`}
         >
           <img
-            src={userInfo.picture}
+            src={userInfo?.picture}
             alt="profile picture missing"
             className="w-9 h-9 rounded-full"
           />
@@ -93,7 +93,7 @@ const HomePage = () => {
               onClick={() => setToggleSidebar(false)}
             />
           </div>
-          <Sidebar user={user && user} closeToggle={setToggleSidebar} />
+          <Sidebar user={userInfo && userInfo} closeToggle={setToggleSidebar} />
         </div>
       )}
       </div>
@@ -104,8 +104,10 @@ const HomePage = () => {
       >
 
       <Pins
-        user={user && user}
+        user={userInfo && userInfo}
       />
+
+      <Feed />
 
       <Navbar
           searchTerm={searchTerm}
@@ -127,10 +129,10 @@ const HomePage = () => {
         {/* </Router> */}
 
 
-        {/* <Routes>
-          <Route path="/user-profile/:userId" element={<UserProfile />} />
-          <Route path="/*" element={<Pins user={user && user} />} />
-        </Routes> */}
+        {/* <Routes> */}
+          {/* <Route path="/user-profile/:userId" element={<UserProfile />} /> */}
+          {/* <Route path="/*" element={<Pins user={user && user} />} /> */}
+        {/* </Routes> */}
 
       </div>
 

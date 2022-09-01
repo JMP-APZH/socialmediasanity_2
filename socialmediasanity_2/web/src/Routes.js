@@ -11,7 +11,7 @@ import { Router, Route } from '@redwoodjs/router'
 import { Navigate, Redirect } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom'
-import { UserProfile } from './components'
+import { Feed, UserProfile } from './components'
 import PinDetail from './components/PinDetail'
 import Pins from './container/Pins'
 import Login2Page from './pages/Login2Page/Login2Page'
@@ -23,6 +23,7 @@ const Routes = ({user}) => {
   return (
     <Router>
         <Route path="/" page={HomePage} name="home" />
+        <Route path='/feed' page={Feed} name="feed" />
         <Route path="/login2" page={Login2Page} name="login2" />
         {/* <Route path="/redirect" element={ <Navigate to="/" /> } /> */}
         <Route path="/login" page={LoginPage} name="login" />
