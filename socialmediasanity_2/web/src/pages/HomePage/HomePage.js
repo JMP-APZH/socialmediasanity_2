@@ -17,6 +17,7 @@ import { userQuery } from "src/utils/data";
 import { client } from 'src/client.js';
 import logo from 'web/src/assets/EmoPic.png';
 import Navbar from "src/components/Navbar";
+import Pin from "src/components/Pin";
 // import { Route, Router, Routes, Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -52,7 +53,6 @@ const HomePage = () => {
     <>
 
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out">
-      Home Page
       <div className="hidden md:flex h-screen flex-initial">
         <Sidebar user={userInfo && userInfo} />
       </div>
@@ -103,17 +103,21 @@ const HomePage = () => {
         ref={scrollRef}
       >
 
-      <Pins
+{/* Here should be some routes */}
+      {/* <Pins
         user={userInfo && userInfo}
-      />
+      /> */}
 
-      <Feed />
+      {/* <Feed /> */}
 
+      {/* Navbar not in the HomePage component in the tutorial */}
       <Navbar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           user={userInfo && userInfo}
       />
+
+      <Pin />
 
         {/* <Router> */}
             {/* <Route */}

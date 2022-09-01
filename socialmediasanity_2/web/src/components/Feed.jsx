@@ -5,9 +5,34 @@ import { client } from 'src/client.js';
 
 import MasonryLayout from './MasonryLayout.jsx';
 import Spinner from './Spinner.jsx';
+import { feedQuery, searchQuery } from 'src/utils/data.js';
 
 const Feed = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [pins, setPins] = useState(null)
+  const { categoryId } = useParams();
+
+  useEffect(() => {
+    setLoading(true);
+
+    if(categoryId) {
+      const query = searchQuery(categoryId);
+
+      client.fetch(query)
+        .then((data) => {
+          setPins(data);
+          setLoading(false)
+        })
+    } else {
+      client.fetch(feedQuery)
+        .then((data) => {
+          setPins(data);
+          setLoading(false);
+        })
+    }
+  }, [categoryId])
+
+
 
   if (loading) {
     return (
@@ -16,7 +41,9 @@ const Feed = () => {
   }
 
   return (
-    <div>Feed</div>
+    <div>
+      {pins && <MasonryLayout pins={pins} />}
+    </div>
   )
 }
 
