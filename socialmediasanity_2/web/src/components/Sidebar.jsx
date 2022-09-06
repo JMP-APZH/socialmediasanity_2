@@ -41,18 +41,27 @@ const Sidebar = ({ user, userInfo, closeToggle }) => {
 
         </Link>
 
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-3'>
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}
             onClick={handleCloseSidebar}
           >
+          <div className='font-bold flex flex-row items-center'>
+            <div className='px-2'>
             <RiHomeFill />
+            </div>
+            <div className=''>
               Home
+            </div>
+          </div>
           </NavLink>
-            <h3  className='mt-2 px-5 text-base 2xl:text-xl'>
+
+          {/* <div> */}
+            <h3  className='pl-2 mt-2 text-base 2xl:text-xl'>
               Discover Categories
             </h3>
+            <div className='flex flex-col gap-3 pl-2'>
             {categories.slice(0, categories.length - 1).map((category) => (
               <NavLink
                 to={`/category/${category.name}`}
@@ -63,6 +72,8 @@ const Sidebar = ({ user, userInfo, closeToggle }) => {
                 {category.name}
               </NavLink>
             ))}
+            </div>
+            {/* </div> */}
         </div>
       </div>
       { user && (
