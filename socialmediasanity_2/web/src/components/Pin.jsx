@@ -40,6 +40,7 @@ const Pin = ({ pin }) => {
         console.log('Total data:', data[0])
         console.log('data.destination:', data[0].destination)
         console.log('data.image:', data[0].image.asset.url)
+        console.log('data.image2:', data[0].image.asset)
         console.log('data.imageurlFor:', urlFor(image))
         console.log('_id is here:', data[0]._id)
         const desti = data[0].destination
@@ -73,6 +74,7 @@ const Pin = ({ pin }) => {
       {/* Pin */}
       {/* Image URL: {image} */}
 
+
       {pinId && (
         <Link
             to={routes.pindetail({ id: pinId })}
@@ -94,7 +96,7 @@ const Pin = ({ pin }) => {
           />
 
 
-          {postHovered && (
+          {postHovered && {image} && (
             <div
               className='absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50'
               style={{ height: '100%' }}
@@ -102,9 +104,11 @@ const Pin = ({ pin }) => {
               <div className='flex items-center justify-between'>
                 <div className='flex gap-2'>
                   <a
-                    href={`${image?.asset?.url}?dl`}
+                    // href={`${image?.asset?.url}?dl`}
+                    href={`${image?.asset?.url}?dl=`}
+                    // href={`${"https://cdn.sanity.io/images/ofswpzzi/production/badb62184d59b9c926f4303acc3b624ec88cf422-4000x6000.jpg"}?dl=`}
                     download
-                    onClick={(e) => stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
                     className='bg-white w-9 h-9 rounded-full flex items-center
                                   justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none'
                   >
