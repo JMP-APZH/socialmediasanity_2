@@ -12,12 +12,14 @@ import Login2Page from 'src/pages/Login2Page/Login2Page';
 
 // const Pin = ({ pin }) => {
 // const Pin = ({ pin: {postedBy, image, _id, destination } }) => {
-const Pin = ({ pin }) => {
+const Pin = ({ }) => {
 
   const [user, setUser] = useState()
-  const [pins, setPins] = useState()
+  const [pin, setPin] = useState()
   const [image, setImage] = useState()
   const [pinId, setPinId] = useState()
+  // const image = "https://cdn.sanity.io/images/ofswpzzi/production/badb62184d59b9c926f4303acc3b624ec88cf422-4000x6000.jpg"
+
 
 
   // useEffect(() => {
@@ -34,8 +36,11 @@ const Pin = ({ pin }) => {
 
     client.fetch(feedQuery)
       .then((data) => {
-        setPins(data);
+        setPin(data[0]);
         setImage(data[0].image.asset.url)
+        // const image = data[0].image.asset.url
+        // setImage("https://cdn.sanity.io/images/ofswpzzi/production/badb62184d59b9c926f4303acc3b624ec88cf422-4000x6000.jpg")
+        // const image = String(data[0].image.asset.url.toString)
         setPinId(data[0]._id)
         console.log('Total data:', data[0])
         console.log('data.destination:', data[0].destination)
@@ -75,7 +80,7 @@ const Pin = ({ pin }) => {
       {/* Image URL: {image} */}
 
 
-      {pinId && (
+      {pinId && {image} && (
         <Link
             to={routes.pindetail({ id: pinId })}
             className='font-bold'
@@ -104,8 +109,9 @@ const Pin = ({ pin }) => {
               <div className='flex items-center justify-between'>
                 <div className='flex gap-2'>
                   <a
-                    // href={`${image?.asset?.url}?dl`}
-                    href={`${image?.asset?.url}?dl=`}
+                    // href={`${image?.asset?.url}?dl=`}
+                    href={`${image}?dl=`}
+                    // href={data[0].image?.asset?.url?dl=}
                     // href={`${"https://cdn.sanity.io/images/ofswpzzi/production/badb62184d59b9c926f4303acc3b624ec88cf422-4000x6000.jpg"}?dl=`}
                     download
                     onClick={(e) => e.stopPropagation()}
@@ -115,7 +121,14 @@ const Pin = ({ pin }) => {
                     <MdDownloadForOffline />
                   </a>
                 </div>
-
+                {alreadySaved?.length !== 0 ? (
+                  <button>
+                    Saved
+                  </button>
+                ) : (
+                  Save
+                )
+                }
               </div>
 
             </div>
