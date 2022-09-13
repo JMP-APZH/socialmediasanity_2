@@ -18,6 +18,7 @@ import { client } from 'src/client.js';
 import logo from 'web/src/assets/EmoPic.png';
 import Navbar from "src/components/Navbar";
 import Pin from "src/components/Pin";
+import { fetchUser } from "src/utils/fetchUser";
 // import { Route, Router, Routes, Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -26,7 +27,9 @@ const HomePage = () => {
 
   const [user, setUser] = useState(null)
 
-  const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+  // const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+
+  const userInfo = fetchUser();
 
   console.log('userInfo from the HomePage:', userInfo);
 

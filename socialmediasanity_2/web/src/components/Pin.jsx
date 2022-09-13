@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { client, urlFor } from 'src/client';
 import { feedQuery, userQuery } from 'src/utils/data';
 import { Link, NavLink, Redirect, Route, routes } from '@redwoodjs/router';
-import { va as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
 import Login2Page from 'src/pages/Login2Page/Login2Page';
+import { fetchUser } from 'src/utils/fetchUser';
 
 
 // const Pin = ({ pin }) => {
 // const Pin = ({ pin: {postedBy, image, _id, destination } }) => {
-const Pin = ({ }) => {
+const Pin = () => {
 
   const [user, setUser] = useState()
   const [pin, setPin] = useState()
@@ -57,9 +58,36 @@ const Pin = ({ }) => {
 
 
 
-  const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+  // const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+  const userInfo = fetchUser();
   console.log('UserInfo from the Pin', userInfo)
 
+  const alreadySaved = !!(pin?.save?.filter((item) => item.postedBy._id === user.googleId))?.length;
+
+  const savePin = (id) => {
+    if(!alreadySaved) {
+      setSavingPost(true);
+
+      client
+        .patch(id)
+        .setIfMissing({ save: [] })
+        .insert('after', 'save[-1]', [{
+          _key: uuidv4(),
+          userId: user.googleId,
+          postedBy: {
+            _type: 'postedBy',
+            _ref: user.googleId
+          }
+        }])
+        .commit()
+        .then(() => {
+          window.location.reload();
+          setSavingPost(false);
+        })
+    }
+  }
+
+  // console.log(save);
   // const { postedBy, image, _id, destination } = pin;
 
   // const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
@@ -121,12 +149,19 @@ const Pin = ({ }) => {
                     <MdDownloadForOffline />
                   </a>
                 </div>
-                {alreadySaved?.length !== 0 ? (
-                  <button>
-                    Saved
+                {alreadySaved ? (
+                  <button type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none'>
+                    {save?.length} Saved
                   </button>
                 ) : (
-                  Save
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      savePin(_id);
+                    }}
+                    type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none'>
+                    Save
+                  </button>
                 )
                 }
               </div>
