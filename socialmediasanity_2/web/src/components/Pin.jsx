@@ -15,10 +15,14 @@ import { fetchUser } from 'src/utils/fetchUser';
 // const Pin = ({ pin: {postedBy, image, _id, destination } }) => {
 const Pin = () => {
 
+  // const { postedBy, image, _id, destination } = pin;
+
   const [user, setUser] = useState()
   const [pin, setPin] = useState()
   const [image, setImage] = useState()
   const [pinId, setPinId] = useState()
+  const [postHovered, setPostHovered] = useState(false);
+  const [savingPost, setSavingPost] = useState(false);
   // const image = "https://cdn.sanity.io/images/ofswpzzi/production/badb62184d59b9c926f4303acc3b624ec88cf422-4000x6000.jpg"
 
 
@@ -64,6 +68,7 @@ const Pin = () => {
 
   const alreadySaved = !!(pin?.save?.filter((item) => item.postedBy._id === user.googleId))?.length;
 
+
   const savePin = (id) => {
     if(!alreadySaved) {
       setSavingPost(true);
@@ -84,8 +89,39 @@ const Pin = () => {
           window.location.reload();
           setSavingPost(false);
         })
+
     }
   }
+
+
+
+  // const alreadySaved = pin?.save?.filter((item) => item?.postedBy?._id === user?.googleId);
+
+  // alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
+
+  // const savePin = (id) => {
+  //   if (alreadySaved?.length === 0) {
+  //     setSavingPost(true);
+
+  //     client
+  //       .patch(id)
+  //       .setIfMissing({ save: [] })
+  //       .insert('after', 'save[-1]', [{
+  //         _key: uuidv4(),
+  //         userId: user?.googleId,
+  //         postedBy: {
+  //           _type: 'postedBy',
+  //           _ref: user?.googleId,
+  //         },
+  //       }])
+  //       .commit()
+  //       .then(() => {
+  //         window.location.reload();
+  //         setSavingPost(false);
+  //       });
+  //   }
+  // };
+
 
   // console.log(save);
   // const { postedBy, image, _id, destination } = pin;
@@ -94,8 +130,7 @@ const Pin = () => {
   // console.log('UserInfo from the Pin', userInfo)
   // const { userInfo.picture } = pin;
 
-  const [postHovered, setPostHovered] = useState(false);
-  const [savingPost, setSavingPost] = useState(false);
+
 
   // const navigateLogin2 = () => {
   //   // <Redirect to="/login2" />
@@ -129,7 +164,7 @@ const Pin = () => {
           />
 
 
-          {postHovered && {image} && (
+          {postHovered && {savingPost} && {image} && (
             <div
               className='absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50'
               style={{ height: '100%' }}
@@ -164,6 +199,7 @@ const Pin = () => {
                   </button>
                 )
                 }
+
               </div>
 
             </div>
